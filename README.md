@@ -2,44 +2,104 @@
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Terminal](https://img.shields.io/badge/Terminal-4D4D4D?style=for-the-badge&logo=windows-terminal&logoColor=white)
+![OOP](https://img.shields.io/badge/POO-999999?style=for-the-badge&logo=python&logoColor=white)
 
-Um sistema bancário simples desenvolvido em Python para operações básicas de conta corrente via terminal.
+Sistema bancário completo desenvolvido em Python com funcionalidades de gerenciamento de contas e usuários via terminal.
 
 ## ✨ Funcionalidades
 
-- [x] **Depósito de valores**
-- [x] **Saque com limite diário**
-- [x] **Visualização de extrato**
-- [x] **Validação de operações**
-- [x] **Interface amigável no terminal**
+### 👥 Gestão de Usuários
+- [x] **Cadastro de usuários** com CPF único
+- [x] **Validação de dados** completos (nome, data nascimento, endereço)
+- [x] **Prevenção de duplicatas** por CPF
 
-## 🛠️ Como Executar
+### 🏦 Gestão de Contas Correntes
+- [x] **Criação de contas** vinculadas a usuários
+- [x] **Sistema de agência** (0001 como padrão)
+- [x] **Números de conta sequenciais** automáticos
+- [x] **Listagem completa** de contas cadastradas
 
-1. Certifique-se que você tem Python instalado (versão 3.6 ou superior)
-2. Clone o repositório ou copie o código
-3. Execute o script:
+### 💰 Operações Financeiras
+- [x] **Depósitos** com validação de valores positivos
+- [x] **Saques** com limite diário e por operação
+- [x] **Extrato detalhado** com histórico de transações
+- [x] **Saldo atualizado** em tempo real
+
+## 🛠️ Arquitetura do Sistema
+
+### 🔄 Fluxo Principal
+```python
+# Estrutura modularizada com funções específicas
+def main() → menu() → operações bancárias
+              │
+              ├── depositar()
+              ├── sacar()
+              ├── exibir_extrato()
+              ├── criar_usuario()
+              ├── criar_conta()
+              └── listar_contas()
+```
+
+### 📦 Estrutura de Dados
+```python
+# Usuários: Lista de dicionários
+usuarios = [
+    {
+        "nome": "João Silva",
+        "data_nascimento": "01-01-1990",
+        "cpf": "12345678900",
+        "endereço": "Rua A, 123 - Centro - SP"
+    }
+]
+
+# Contas: Lista de dicionários vinculados
+contas = [
+    {
+        "agencia": "0001",
+        "numero_conta": 1,
+        "usuario": {usuário}
+    }
+]
+```
+
+## 🚀 Como Executar
+
+1. **Pré-requisitos**: Python 3.6+ instalado
+2. **Clone o repositório** ou copie o código
+3. **Execute o script**:
 
 ```bash
-python sistema_bancario.py
+python3 sistema_bancario.py
 ```
 
 ## 📋 Regras do Sistema
 
-### 💰 Depósitos
-- Apenas valores positivos são aceitos
-- Valores são arredondados para 2 casas decimais
-- Todos os depósitos são registrados no extrato
+### 💳 Cadastro de Usuários
+- CPF como identificador único (somente números)
+- Dados completos obrigatórios
+- Impedimento de cadastro duplicado
 
-### 💸 Saques
-- Limite de **R$ 500,00 por saque**
+### 🏦 Criação de Contas
+- Vinculação obrigatória a usuário existente
+- Agência fixa "0001"
+- Número de conta sequencial automático
+
+### 💰 Operações Financeiras
+**Depósitos:**
+- Apenas valores positivos
+- Arredondamento para 2 casas decimais
+- Registro no extrato
+
+**Saques:**
+- Limite de **R$ 500,00 por operação**
 - Máximo de **3 saques diários**
 - Saldo suficiente obrigatório
-- Cada saque é registrado no extrato
+- Registro no extrato
 
-### 📊 Extrato
-- Exibe todas as movimentações na sessão atual
-- Mostra o saldo atualizado
-- Mensagem especial quando não há movimentações
+**Extrato:**
+- Histórico completo de transações
+- Saldo atualizado
+- Mensagem especial para sem movimentações
 
 ## 🖥️ Demonstração
 
@@ -47,31 +107,20 @@ python sistema_bancario.py
 [1] Depositar
 [2] Sacar
 [3] Extrato
+[4] Novo usuário
+[5] Nova conta
+[6] Listar conta
 [0] Sair
 
-=> 1
-Menu [1] Depósito
+=> 4
+Menu [4] Criação de novo usuário
 
-Digite o valor que deseja depositar: 1000
-Deposito de R$ 1000.00 realizado com sucesso
+Informe o CPF (somente números): 12345678900
+Informe o nome completo: Maria Silva
+Informe a data e nascimento (dd-mm-aaaa): 15-05-1985
+Informe o endereço (logradouro, n° - bairro - cidade/sigla estado): Av. Principal, 456 - Centro - SP
+Usuário cadastrado com sucesso!
 ```
-
-## 🧠 Estrutura do Código
-
-### Variáveis Principais
-```python
-saldo = 0               # Armazena o saldo atual
-limite = 500            # Limite por saque
-extrato = ""            # Histórico de operações
-numero_saques = 0       # Contador de saques
-LIMITE_SAQUES = 3       # Máximo de saques diários
-```
-
-### Fluxo Principal
-1. Exibe menu de opções
-2. Processa a escolha do usuário
-3. Valida e executa a operação
-4. Retorna ao menu até que o usuário saia
 
 ## 👨‍💻 Autor
 
